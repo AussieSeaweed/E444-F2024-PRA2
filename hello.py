@@ -8,7 +8,10 @@ from flask_wtf import FlaskForm
 from wtforms import EmailField, StringField, SubmitField
 from wtforms.validators import DataRequired
 
+load_dotenv()
+
 app = Flask(__name__)
+app.config['SECRET_KEY'] = getenv('FLASK_SECRET_KEY', 'hard to guess string')
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
@@ -65,10 +68,6 @@ def internal_server_error(e):
 
 
 def main():
-    load_dotenv()
-
-    app.config['SECRET_KEY'] = getenv('FLASK_SECRET_KEY')
-
     app.run(debug=True)
 
 
